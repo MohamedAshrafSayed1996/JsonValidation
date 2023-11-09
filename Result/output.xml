@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.1 on win32)" generated="20231109 14:35:20.036" rpa="false" schemaversion="3">
+<suite id="s1" name="Task" source="M:\Work\AutomationSessions\JsonValidation\Tests\Task.robot">
+<test id="s1-t1" name="Get_Request" line="13">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>GetUser</arg>
+<arg>${URL2}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231109 14:35:20.306" level="INFO">Creating Session using : alias=GetUser, url=https://fakestoreapi.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20231109 14:35:20.306" endtime="20231109 14:35:20.306"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>GetUser</arg>
+<arg>/products/1</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20231109 14:35:21.646" level="INFO">GET Request : url=https://fakestoreapi.com/products/1 
+ path_url=/products/1 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20231109 14:35:21.647" level="INFO">GET Response : url=https://fakestoreapi.com/products/1 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 09 Nov 2023 12:35:21 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"16c-MMdrqY6N0sTiefLdsgtBej9eunY"', 'X-Powered-By': 'Express', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=lr7mAUwcOZLsjAyEL%2Fd3I0YM8K8A4NxXOUIrt%2FGp%2FBvZRLdBf98%2FnILEqooYMX4fyMQsQSaOjcSrLfvtzq51BJkOhUta%2FtzgpG8KwQv1kE69Io6eUPyd7CDqKYhe4Yu7Lr6m"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '823618599b0c0d8e-MRS', 'Content-Encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops","price":109.95,"description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday","category":"men's clothing","image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg","rating":{"rate":3.9,"count":120}} 
+ </msg>
+<msg timestamp="20231109 14:35:21.647" level="INFO">C:\Python\Lib\site-packages\urllib3\connectionpool.py:1095: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20231109 14:35:21.648" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231109 14:35:20.307" endtime="20231109 14:35:21.648"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231109 14:35:21.651" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231109 14:35:21.649" endtime="20231109 14:35:21.651"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${json}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231109 14:35:21.653" level="INFO">${json} = {'id': 1, 'title': 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops', 'price': 109.95, 'description': 'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inc...</msg>
+<status status="PASS" starttime="20231109 14:35:21.652" endtime="20231109 14:35:21.653"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${json['name']}</arg>
+<arg>Brandi</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231109 14:35:21.655" level="FAIL">Resolving variable '${json['name']}' failed: KeyError: 'name'</msg>
+<status status="FAIL" starttime="20231109 14:35:21.654" endtime="20231109 14:35:21.655"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${json['salary']}</arg>
+<arg>1000</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" starttime="20231109 14:35:21.656" endtime="20231109 14:35:21.656"/>
+</kw>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<status status="NOT RUN" starttime="20231109 14:35:21.656" endtime="20231109 14:35:21.657"/>
+</kw>
+<status status="FAIL" starttime="20231109 14:35:20.305" endtime="20231109 14:35:21.657">Resolving variable '${json['name']}' failed: KeyError: 'name'</status>
+</test>
+<status status="FAIL" starttime="20231109 14:35:20.038" endtime="20231109 14:35:21.660"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Task">Task</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
